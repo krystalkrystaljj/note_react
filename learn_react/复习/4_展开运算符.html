@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr1 = [1,2,3,4,5]
+    let arr2 = [6,7,8,9,10]
+    console.log(...arr1);//展开一个数组
+    let arr3 = [...arr1,...arr2]//连接数组
+    console.log(arr3);
+
+    //参数个数不确定时,批量传递参数
+    function sum(...num) {
+      return num.reduce((preValue,currentValue)=>{
+        return preValue + currentValue
+      })
+    }
+    console.log(sum(1,2,3));
+
+
+    //构造字面量对象时使用展开语法
+    let person = {name:'tom',age:19}
+    // console.log(...person);//展开运算符不能展开一个对象
+    //写了一个花括号，代表要复制一个对象
+    let person2 = {...person}
+    console.log(person2);
+
+    //复制对象的同时，修改他的属性
+    let person3 = {...person,name:'tjj'}
+    console.log(person3);
+  </script>
+</body>
+</html>

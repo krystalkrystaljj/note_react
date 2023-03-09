@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的基本知识</title>
+</head>
+<body>
+  <script>
+    class Person {
+      //理论上时可以不写构造器，但是每个实例对象没有独立的信息，没有意义
+      constructor(name,age) {
+        //这里的this是指向——类的实例对象
+        this.name = name
+        this.age = age
+      }
+      //一般方法
+      speak() {
+        //speak方法放在了哪里？——类的原型对象上，供实例使用
+        //通过Person实例调用speak时，speak中的this就是Person实例
+        console.log(`我叫${this.name},我的年龄是${this.age}`);
+      }
+    }
+
+    class Student extends Person{
+      constructor(name,age,grade) {
+        super(name,age)
+        this.grade = grade
+      }
+      //重写从父类继承过来的方法
+      speak() {
+        console.log(`我叫${this.name},我的年龄是${this.age},我的年级是${this.grade}`);
+      }
+      study() {
+
+        console.log('我会努力学习的');
+      }
+    }
+
+    class Car {
+      constructor(name, price) {
+        this.name = name
+        this.price = price
+      }
+
+      //给car的实例对象上添加一个属性，名为wheel值为4
+      wheel = 4
+    }
+    const c1 = new Car('奔驰c63',199)
+    console.log(c1);
+    
+
+  </script>
+</body>
+</html>

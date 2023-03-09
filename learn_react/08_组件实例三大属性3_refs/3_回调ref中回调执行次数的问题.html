@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ref</title>
+</head>
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Demo extends React.Component{
+      
+      state = {isHot:true}
+      showInfo=()=>{
+        console.log(this);
+        const {input1} = this
+        alert(input1.value)
+      }
+      changeWeather=()=>{
+        const ishot = this.state.isHot
+        this.setState({isHot:!ishot})
+      }
+      saveInput= (c)=>{
+        this.input1 = c;
+        console.log('@',c);
+      }
+      render() {
+        return (
+          <div>
+            <div>
+            {/*<input  ref={(currentNode)=>{this.input1 = currentNode;console.log('@',currentNode);}} type="text"/>*/}
+              <input  ref={this.saveInput} type="text"/>
+              <button onClick={this.showInfo}>按钮</button>
+            </div>
+            <h2>今天天气炎热{this.state.isHot ? '炎热':'凉爽'}</h2>
+            <button onClick={this.changeWeather}>改变天气</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo a='1'/>,document.getElementById('test'))
+  </script>
+</body>
+</html>

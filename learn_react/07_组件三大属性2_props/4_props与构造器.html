@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>props基本使用</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+  <!-- 引入prop-types.js，用于对组件标签属性进行限制 -->
+  <script type="text/javascript" src="../js/prop-types.js"></script>
+
+  <script type="text/babel">
+    class Person extends React.Component {
+      constructor(props) {
+        //构造器是否接受props，是否传递super，取决于：是否希望在构造器中通过this访问props
+        super(props)
+        console.log('constructor',this.props);
+      }
+
+      render() {
+        const { name, age, sex } = this.props
+        // console.log(this);
+        // this.props.name = 'jack'
+        return (
+          <ul>
+            <li>姓名：{this.props.name}</li>
+            <li>性别：{this.props.sex}</li>
+            <li>年龄：{this.props.age + 1}</li>
+          </ul>
+        )
+      }
+      //对标签属性进行类型、必要性的限制
+      static propTypes = {
+        name: PropTypes.string.isRequired,//限制name必传，且为字符串
+        sex: PropTypes.string,//限制sex为字符串
+        // age:PropTypes.number,
+        speak: PropTypes.func//限制speak为函数
+      }
+
+      //指定默认标签属性
+      static defaultProps = {
+        sex: '不男不女',
+        age: 18
+      }
+
+    }
+
+
+    class Car {
+      constructor(name, price) {
+        this.name = name
+        this.price = price
+      }
+
+      //给car的实例对象上添加一个属性，名为wheel值为4
+      wheel = 4
+    }
+
+
+    ReactDOM.render(<Person name='krystal'/>, document.getElementById('test'))
+  </script>
+
+</body>
+
+</html>

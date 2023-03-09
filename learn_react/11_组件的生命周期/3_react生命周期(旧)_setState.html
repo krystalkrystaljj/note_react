@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>引出生命周期</title>
+</head>
+<body>
+  <div id="test"></div>
+
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+    class Count extends React.Component{
+
+      constructor(props){
+        console.log('Count-constructor');
+        super(props)
+        this.state = {count:0}
+      }
+      add=()=>{
+        const {count} = this.state
+        this.setState({count:count+1})
+      }
+      
+      //卸载组件按钮的回调
+      death=()=>{
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+
+
+      //组件将要挂载的钩子
+      componentWillMount(){
+        console.log('Count-componentWillMount');
+      }
+      //组件挂载完毕的钩子
+      componentDidMount(){
+        console.log('Count-componentDidMount');
+      }
+
+      componentWillUnmount(){
+        console.log('Count-componentWillUnmount');
+      }
+
+      //控制组件更新的“阀门”
+      shouldComponentUpdate() {
+        console.log('count-shouldComponenUpdate');
+        return true
+      }
+
+      //组件将要更新的钩子
+      componentWillUpdate() {
+        console.log('componentWillUpdate');
+      }
+
+      //组件更新完的钩子
+      componentDidUpdate() {
+        console.log('componentDidUpdate');
+      }
+
+      render() {
+        console.log('Count-render');
+        return (
+          <div>
+            <h2>当前求和为:{this.state.count}</h2>
+            <button onClick={this.add}>点我+1</button>
+            <button onClick={this.death}>点击卸载</button>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Count/>,document.getElementById('test'))
+  </script>
+  
+</body>
+</html>

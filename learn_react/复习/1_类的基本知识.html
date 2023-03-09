@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类的基本知识</title>
+</head>
+<body>
+  <script>
+    class Person {
+      //理论上时可以不写构造器，但是每个实例对象没有独立的信息，没有意义
+      constructor(name,age) {
+        //这里的this是指向——类的实例对象
+        this.name = name
+        this.age = age
+      }
+      //一般方法
+      speak() {
+        //speak方法放在了哪里？——类的原型对象上，供实例使用
+        //通过Person实例调用speak时，speak中的this就是Person实例
+        console.log(`我叫${this.name},我的年龄是${this.age}`);
+      }
+    }
+
+    // const p1 =new Person("tom",18)
+    // const p2 =new Person("tjj",17)
+
+    // console.log(p1);
+    // console.log(p2);
+
+    // p1.speak()
+    // p2.speak()
+    // p1.speak.call({a:1,b:2})
+
+
+    /*
+    1、Student类继承了Person类，也继承了它的构造器里面的属性，所以这种情况
+    可以不写构造器
+    2、当继承的类需要拥有一些自己独立于父类的属性时，需要再写构造器*/
+    class Student extends Person{
+      constructor(name,age,grade) {
+        super(name,age)
+        this.grade = grade
+      }
+      //重写从父类继承过来的方法
+      speak() {
+        console.log(`我叫${this.name},我的年龄是${this.age},我的年级是${this.grade}`);
+      }
+      study() {
+        //speak方法放在了哪里？——类的原型对象上，供实例使用
+        //通过Student实例调用study时，study中的this就是Student实例
+        console.log('我会努力学习的');
+      }
+    }
+    
+    const s1= new Student('小张',12,'高一')
+    console.log(s1);
+    //这是调用的是自己原型上的speak方法
+    s1.speak()
+    s1.study()
+    
+
+  </script>
+</body>
+</html>

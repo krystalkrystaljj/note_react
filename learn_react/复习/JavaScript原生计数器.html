@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生事件绑定</title>
+</head>
+<body>
+  <div id="num">0</div>
+  <button id="add">+</button>
+  <button id="decrease">-</button>
+  
+  <script type="text/javascript">
+
+
+    let count = 0
+    const add = document.getElementById('add')
+    add.addEventListener('click',() => {
+      count++;
+      document.getElementById('num').innerText = count;
+    })
+    
+    const decr = document.getElementById('decrease')
+    decr.onclick = () => {
+      count--;
+      document.getElementById('num').innerText = count;
+    }
+    
+
+
+  </script>
+</body>
+</html>
